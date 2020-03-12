@@ -1,3 +1,4 @@
 # IDS-python-blockchain
 
-upload code here
+run server
+then run client
