@@ -48,7 +48,7 @@ class Blockchain:
                 nonce = randomString.getRandomString()
                 block['nonce'] = nonce
                 block['hash'] = hashlib.sha256(json.dumps(block).encode()).hexdigest()
-                if block['hash'][0:3] == '000':
+                if block['hash'][0:4] == '0000':
                     break
             #self.Blockchain.append(block)
         #self._tempchain = self._getBlock()
