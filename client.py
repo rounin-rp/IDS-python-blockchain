@@ -30,6 +30,7 @@ class RecieveMessages(Thread):
 				message = pickle.loads(ser.recv(1024))
 			else:
 				message = pickle.loads(ser.recv(var+blen+3))
+				blen = 0
 			if message[0] == 2001:
 				flag = True
 				print(f"please validate the transaction below : ")

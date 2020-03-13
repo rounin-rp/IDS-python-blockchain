@@ -61,9 +61,9 @@ while True:
                     requesting_socket = notified_socket
                     for sockets in socket_list:
                         if(sockets == server_socket or sockets == notified_socket):
-                            print("ha ")
+                            #print("ha ")
                             continue
-                        print(f"sent to {clients[sockets]}")
+                        #print(f"sent to {clients[sockets]}")
                         sockets.send(pickle.dumps(message))
                         toMine = message[1]
                 elif(message[0] == 2002):
@@ -74,18 +74,15 @@ while True:
                     else:
                         total_voters+=1
                 elif(message[0] == 3001):
-                    print("data got to mine ")
                     data = message[1]
                     blockchain.mineChain(data)
                 elif(message[0] == 3002):
                     chain = blockchain.Blockchain
-                    print(chain)
                     data = [3003,len(str(chain)),len(str(len(str(chain))))]
                     notified_socket.send(pickle.dumps(data))
                     notified_socket.send(pickle.dumps([3004,chain]))
 
     if(request and total_voters == total_miners-1):
-        print(f"i am inside request total votes = {votes} and total miners = {total_miners-1}")
         if(votes/(total_miners-1) >= 0.5):
             prev_hash = blockchain.Blockchain[-1]['hash']
             requesting_socket.send(pickle.dumps([2003,1,[prev_hash,toMine]]))
@@ -100,4 +97,3 @@ while True:
         print(f"something is wrong with {clients[notified_socket][0]}")
         socket_list.remove(notified_socket)
         del clients[notified_socket]
-    print("done circulation")
