@@ -79,6 +79,7 @@ while True:
                     blockchain.mineChain(data)
                 elif(message[0] == 3002):
                     chain = blockchain.Blockchain
+                    print(chain)
                     data = [3003,len(str(chain)),len(str(len(str(chain))))]
                     notified_socket.send(pickle.dumps(data))
                     notified_socket.send(pickle.dumps([3004,chain]))
