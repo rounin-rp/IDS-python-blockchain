@@ -2,6 +2,7 @@ import socket
 import pickle
 import select
 import Blockchain
+import sys
 from threading import *
 
 
@@ -16,6 +17,9 @@ blockchain = Blockchain.Blockchain()
 flag = False
 
 class RecieveMessages(Thread):
+	def __init__(self):
+		Thread.__init__(self)
+		self.setDaemon(True)
 	def run(self):
 		global flag
 		global ser
@@ -36,6 +40,8 @@ class RecieveMessages(Thread):
 				ser.send(pickle.dumps([3001,data]))
 			else:
 				flag = False
+	def quit(self):
+			sys.exit()
 
 
 if __name__ == '__main__':
@@ -46,7 +52,7 @@ if __name__ == '__main__':
 			continue
 		print("enter your choice ")
 		print("1 to add a block ")
-		print("2 to delete a block ")
+		print("2 to exit  ")
 		try:
 			opt = int(input())
 		except:
@@ -57,7 +63,9 @@ if __name__ == '__main__':
 			ser.send(pickle.dumps([2001,data]))
 			flag = False
 		elif opt == 2:
-			pass
+			print("quitting")
+			obj.quit()
+			sys.exit()
 		else:
 			print(f"invalid choice {opt}")
 
