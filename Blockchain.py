@@ -53,7 +53,7 @@ class Blockchain:
             #self.Blockchain.append(block)
         #self._tempchain = self._getBlock()
         #self._saveBlockchain()
-        print('reaching before return ')
+        #print('reaching before return ')
         return block
 
     def mineChain(self,block):

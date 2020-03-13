@@ -77,6 +77,12 @@ while True:
                     print("data got to mine ")
                     data = message[1]
                     blockchain.mineChain(data)
+                elif(message[0] == 3002):
+                    chain = blockchain.Blockchain
+                    data = [3003,len(str(chain)),len(str(len(str(chain))))]
+                    notified_socket.send(pickle.dumps(data))
+                    notified_socket.send(pickle.dumps([3004,chain]))
+
     if(request and total_voters == total_miners-1):
         print(f"i am inside request total votes = {votes} and total miners = {total_miners-1}")
         if(votes/(total_miners-1) >= 0.5):
